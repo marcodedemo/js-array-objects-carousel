@@ -33,6 +33,9 @@ let imageContainerElement = document.getElementById("imgs-container");
 // dichiaro la variabile corrispondente all'immagine dello slideshow
 let imageElement = document.getElementById("slideshow-image");
 
+// dichiaro la variabile corrispondente al contenitore delle thumbnails
+let thumbnailContainerElement = document.getElementById("thumbnails-container");
+
 // dichiaro una variabile indice corrispondente all'indice dell'immagine dello slideshow
 let index = 0;
 
@@ -67,6 +70,7 @@ const images = [
 
 
 
+
 // creo l'elemento div contenitore dei testi nel DOM
 let imageTextElement = document.createElement("div");
 
@@ -86,6 +90,7 @@ let imageTitleElement = createImageTitle();
 imageTextElement.append(imageTitleElement);
 
 
+
 // imposto una variabile alla funzione di creazione della caption 
 let imageCaptionElement = createImageCaption();
 
@@ -95,64 +100,118 @@ imageTextElement.append(imageCaptionElement);
 
 /* -------------------------------------------------------------------------- */
 
+// ciclo di creazione delle thumbnail 
+for(let i = 0; i < images.length; i++){
+
+    // creo il nuovo elemento in pagina che corrisponderà alal thumbnail
+    let newThumbnail = document.createElement("div");
+
+    // aggiungo una classe di stile
+    newThumbnail.classList.add("thumbnail");
+
+    // imposto l'altezza alla thumbnail in base al numero di thumbnail da creare
+    newThumbnail.style.height = "calc(100% /" + images.length + ")";
+
+    // imposto il background delle thumbnails
+    newThumbnail.style.backgroundImage ='url("' + images[i].image + '")';
+
+    // attribuisco la genitorialità
+    thumbnailContainerElement.append(newThumbnail);
+
+
+}
+
+// creo un nodo contenente tutti gli elementi HTML delle thumbnail
+const thumbnails = document.querySelectorAll(".thumbnail");
 
 // imposto lo stato iniziale di immagine, titolo e caption
 changeImgTitleCaption(imageElement, imageTitleElement, imageCaptionElement, images);
 
+// aggiungo la classe active alla thumbnail iniziale
+thumbnails[index].classList.add("active");
 
 
 
+
+/* -------------------------------------------------------------------------- */
+/*                                  ARROW UP                                  */
+/* -------------------------------------------------------------------------- */
 
 
 // imposto l'evento click della freccia su
 arrowUpElement.addEventListener("click", () =>{
 
+    // al click della freccia su tolgo la classe active dalla thumbnail precedente
+    thumbnails[index].classList.remove("active");
+
+
     // se l'indice dello slideshow è minore della lunghezza dell'array -1
-    if(index < images.length - 1){
+    if(index <= images.length - 1  && index >= 1){
 
         // aumento l'indice
-        index++;
-
-        // cambio immagine titolo e caption in base all'index
-        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
-
-    // altrimenti
-    }else {
-
-        // reimposto l'indice a 0
-        index = 0;
-
-        // cambio immagine titolo e caption in base all'index
-        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
-
-    }
-
-})
-
-
-
-
-
-// imposto l'evento click della freccia giu
-arrowDownElement.addEventListener("click", () =>{
-
-    // se l'indice dello slideshow è minore o uguale alla lunghezza dell'array -1 E l'indice è maggiore uguale a 1 
-    if(index <= images.length - 1  && index >= 1){
-    
-        // diminuisco l'indice
         index--;
 
         // cambio immagine titolo e caption in base all'index
         changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
 
-    // altrimenti    
+        // imposto la classe active alla thumbnail relativa all'index
+        thumbnails[index].classList.add("active");
+
+
+    // altrimenti
     }else {
 
         // imposto l'indice alla lunghezza dell'array -1 
         index = images.length - 1;
 
         // cambio immagine titolo e caption in base all'index
-        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);        
+        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
+
+        // imposto la classe active alla thumbnail relativa all'index
+        thumbnails[index].classList.add("active");
+
+    }
+
+})
+
+
+/* -------------------------------------------------------------------------- */
+/*                                 ARROW DOWN                                 */
+/* -------------------------------------------------------------------------- */
+
+
+// imposto l'evento click della freccia giu
+arrowDownElement.addEventListener("click", () =>{
+
+    // al click della freccia su tolgo la classe active dalla thumbnail precedente
+    thumbnails[index].classList.remove("active");
+
+    
+    // se l'indice dello slideshow è minore o uguale alla lunghezza dell'array -1 E l'indice è maggiore uguale a 1 
+    if(index < images.length - 1){
+    
+        // diminuisco l'indice
+        index++;
+
+        // cambio immagine titolo e caption in base all'index
+        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
+
+        // imposto la classe active alla thumbnail relativa all'index
+        thumbnails[index].classList.add("active");
+
+
+    // altrimenti    
+    }else {
+
+        // reimposto l'indice a 0
+        index = 0;
+
+        // cambio immagine titolo e caption in base all'index
+        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images); 
+
+        // imposto la classe active alla thumbnail relativa all'index
+        thumbnails[index].classList.add("active");   
+
     }
 })
 
@@ -196,6 +255,7 @@ function createImageCaption (){
     // scrivo la caption all'interno
     imageCaption.innerText = "";  
 
+    // return imageCaption
     return imageCaption;
     
 }
