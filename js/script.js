@@ -69,6 +69,12 @@ const images = [
 ];
 
 
+// creo un intervallo di esecuzione della funzione arrowDownClick di 3secondi
+setInterval(arrowDownClick, 3000);
+
+
+
+
 
 
 // creo l'elemento div contenitore dei testi nel DOM
@@ -183,6 +189,7 @@ arrowUpElement.addEventListener("click", () =>{
 // imposto l'evento click della freccia giu
 arrowDownElement.addEventListener("click", () =>{
 
+
     // al click della freccia su tolgo la classe active dalla thumbnail precedente
     thumbnails[index].classList.remove("active");
 
@@ -213,6 +220,7 @@ arrowDownElement.addEventListener("click", () =>{
         thumbnails[index].classList.add("active");   
 
     }
+    
 })
 
 
@@ -240,7 +248,7 @@ function createImageTitle(){
     // return imageTitle
     return imageTitle;
     
-}
+};
 
 
 // creo l'elemento caption
@@ -258,7 +266,7 @@ function createImageCaption (){
     // return imageCaption
     return imageCaption;
     
-}
+};
 
 
 /**
@@ -280,4 +288,14 @@ function changeImgTitleCaption (image, title, caption, array){
 
     // imposto la descrizione dell'immagine di partenza
     caption.innerText = array[index].text;
-}
+};
+
+
+
+// funzione che clicca il pulsante in pagina arrowDown
+function arrowDownClick(){
+
+    // simulo il click dell'elemento in pagina
+    document.getElementById("arrow-down").click();
+
+};
