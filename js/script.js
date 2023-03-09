@@ -107,7 +107,7 @@ startAndStopButtonElement.addEventListener("click", function(){
     }else{
         
         // attivo l'esecuzione della funzione
-        clickInterval = setInterval(arrowDownClick, 1000);
+        clickInterval = setInterval(arrowDownClick, 3000);
 
         // reimposto la variabile di controllo
         StartAndStopIsClicked = true;
@@ -134,7 +134,7 @@ invertButtonElement.addEventListener("click",function(){
         clearInterval(clickInterval);
         
         // imposto la funzione arrowUp in esecuzione
-        clickInterval = setInterval(arrowUpClick,1000);
+        clickInterval = setInterval(arrowUpClick,3000);
 
         // reimposto la variabile di controllo
         invertIsClicked = true;
@@ -146,7 +146,7 @@ invertButtonElement.addEventListener("click",function(){
         clearInterval(clickInterval);
 
         // imposto la funzione arrowDown in esecuzione
-        clickInterval = setInterval(arrowDownClick, 1000);
+        clickInterval = setInterval(arrowDownClick, 3000);
 
         // reimposto la variabile di controllo
         invertIsClicked = false;
