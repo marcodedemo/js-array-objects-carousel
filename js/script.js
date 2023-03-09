@@ -97,7 +97,7 @@ imageTextElement.append(imageCaptionElement);
 
 
 // imposto lo stato iniziale di immagine, titolo e caption
-imageTitleAndCaptionSetToStart(imageElement, imageTitleElement, imageCaptionElement, images);
+changeImgTitleCaption(imageElement, imageTitleElement, imageCaptionElement, images);
 
 
 
@@ -113,20 +113,25 @@ arrowUpElement.addEventListener("click", () =>{
         // aumento l'indice
         index++;
 
-        // cambio l'immagine da visualizzare in base all'indice
-        imageElement.src = images[index].image;
+        // cambio immagine titolo e caption in base all'index
+        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
 
-        // cambio il titolo da visualizzare in base all'indice
-        imageTitleElement.innerText = images[index].title;
+    // altrimenti
+    }else {
 
-        // cambio la caption da visualizzare in base all'indice
-        imageCaptionElement.innerText = images[index].text;
+        // reimposto l'indice a 0
+        index = 0;
 
-
+        // cambio immagine titolo e caption in base all'index
+        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
 
     }
 
 })
+
+
+
+
 
 // imposto l'evento click della freccia giu
 arrowDownElement.addEventListener("click", () =>{
@@ -137,15 +142,17 @@ arrowDownElement.addEventListener("click", () =>{
         // diminuisco l'indice
         index--;
 
-        // cambio l'immagine da visualizzare in base all'indice
-        imageElement.src = images[index].image;
+        // cambio immagine titolo e caption in base all'index
+        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);
 
-        // cambio il titolo da visualizzare in base all'indice
-        imageTitleElement.innerText = images[index].title;
+    // altrimenti    
+    }else {
 
-        // cambio la caption da visualizzare in base all'indice
-        imageCaptionElement.innerText = images[index].text;
+        // imposto l'indice alla lunghezza dell'array -1 
+        index = images.length - 1;
 
+        // cambio immagine titolo e caption in base all'index
+        changeImgTitleCaption (imageElement, imageTitleElement, imageCaptionElement, images);        
     }
 })
 
@@ -203,7 +210,7 @@ function createImageCaption (){
  * @returns {any}
  */
 
-function imageTitleAndCaptionSetToStart (image, title, caption, array){
+function changeImgTitleCaption (image, title, caption, array){
 
     // imposto l'immagine di partenza dello slideshow
     image.src = array[index].image;
