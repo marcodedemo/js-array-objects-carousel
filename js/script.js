@@ -36,8 +36,20 @@ let imageElement = document.getElementById("slideshow-image");
 // dichiaro la variabile corrispondente al contenitore delle thumbnails
 let thumbnailContainerElement = document.getElementById("thumbnails-container");
 
+// dichiaro le variabili corrispondenti ai due pulsanti relativi all'auto scorrimento dello slideshow 
+let startAndStopButtonElement = document.getElementById("start-stop");
+let invertButtonElement = document.getElementById("invert");
+
 // dichiaro una variabile indice corrispondente all'indice dell'immagine dello slideshow
 let index = 0;
+
+// creo una variabile di controllo per il pulsante start&stop
+let StartAndStopIsClicked = false;
+
+// creo una variabile di controllo per il pulsante invert
+let invertIsClicked = false;
+
+
 
 // array di oggetti
 const images = [
@@ -69,8 +81,79 @@ const images = [
 ];
 
 
-// creo un intervallo di esecuzione della funzione arrowDownClick di 3secondi
-setInterval(arrowDownClick, 3000);
+// dichiaro la variabile a cui assegnare la funzione dell'intervallo di tempo
+let clickInterval;
+
+
+// imposto l'evento click del pulsante start&stop
+startAndStopButtonElement.addEventListener("click", function(){
+    
+    // se la variabile di controllo del pulsante è vera 
+    if(StartAndStopIsClicked){
+        
+        // rimuovo l'esecuzione della funzione 
+        clearInterval(clickInterval);
+
+        // reimposto la variabile di controllo
+        StartAndStopIsClicked = false;
+
+        // cambio il testo del pulsante
+        this.innerText = "Start";
+
+        // cambio il colore del pulsante
+        this.style.backgroundColor = "green";
+        
+    // altrimenti
+    }else{
+        
+        // attivo l'esecuzione della funzione
+        clickInterval = setInterval(arrowDownClick, 1000);
+
+        // reimposto la variabile di controllo
+        StartAndStopIsClicked = true;
+
+        // cambio il testo del pulsante
+        this.innerText = "Stop";
+
+        // cambio il colore del pulsante
+        this.style.backgroundColor = "red";
+
+    }
+});
+
+
+
+
+// imposto l'evento click del pulsante inverti
+invertButtonElement.addEventListener("click",function(){
+
+    // se ho cliccato il pulsante start E la variabile di controllo è falsa
+    if (StartAndStopIsClicked == true  && invertIsClicked == false){
+
+        // rimuovo la funzione precedente
+        clearInterval(clickInterval);
+        
+        // imposto la funzione arrowUp in esecuzione
+        clickInterval = setInterval(arrowUpClick,1000);
+
+        // reimposto la variabile di controllo
+        invertIsClicked = true;
+
+    // eltrimenti se il pulsante start è stato cliccato e la variabile di controllo è vera 
+    }else if(StartAndStopIsClicked == true && invertIsClicked == true) {
+
+        // rimuovo la funzione precedente
+        clearInterval(clickInterval);
+
+        // imposto la funzione arrowDown in esecuzione
+        clickInterval = setInterval(arrowDownClick, 1000);
+
+        // reimposto la variabile di controllo
+        invertIsClicked = false;
+
+    }
+
+});
 
 
 
@@ -297,5 +380,15 @@ function arrowDownClick(){
 
     // simulo il click dell'elemento in pagina
     document.getElementById("arrow-down").click();
+
+};
+
+
+
+// funzione che clicca il pulsante in pagina arrowUp
+function arrowUpClick(){
+
+    // simulo il click dell'elemento in pagina
+    document.getElementById("arrow-up").click();
 
 };
