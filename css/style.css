@@ -43,27 +43,27 @@ h1{
 
 
 /* arrows */
-#arrow-left{
+#arrow-up{
     position: absolute;
-
-    top: 50%;
-    left: 10px;
-
-    transform: translateY(-50%);
+    top: 10px;
+    right: 50%;
 
     font-size: 2em;
     color: white;
+
+    z-index: 1;
 }
 
-#arrow-right{
+#arrow-down{
     position: absolute;
-
-    top: 50%;
-    right: 10px;
-    
-    transform: translateY(-50%);
+    bottom: 10px;
+    right: 50%;
 
 
     font-size: 2em;
     color: white;
+
+    z-index: 1;
+
+
 }
