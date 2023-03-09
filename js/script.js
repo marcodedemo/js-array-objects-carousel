@@ -103,7 +103,7 @@ startAndStopButtonElement.addEventListener("click", function(){
         StartAndStopIsClicked = false;
 
         // cambio il testo del pulsante
-        this.innerText = "Start";
+        this.innerText = "Start Autoplay";
 
         // cambio il colore del pulsante
         this.style.backgroundColor = "green";
@@ -118,7 +118,7 @@ startAndStopButtonElement.addEventListener("click", function(){
         StartAndStopIsClicked = true;
 
         // cambio il testo del pulsante
-        this.innerText = "Stop";
+        this.innerText = "Stop Autoplay";
 
         // cambio il colore del pulsante
         this.style.backgroundColor = "red";
