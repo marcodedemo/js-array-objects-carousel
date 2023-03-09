@@ -81,6 +81,11 @@ const images = [
 ];
 
 
+
+/* -------------------------------------------------------------------------- */
+/*                            START AND STOP BUTTON                           */
+/* -------------------------------------------------------------------------- */
+
 // dichiaro la variabile a cui assegnare la funzione dell'intervallo di tempo
 let clickInterval;
 
@@ -122,6 +127,9 @@ startAndStopButtonElement.addEventListener("click", function(){
 });
 
 
+/* -------------------------------------------------------------------------- */
+/*                                INVERT BUTTON                               */
+/* -------------------------------------------------------------------------- */
 
 
 // imposto l'evento click del pulsante inverti
@@ -158,8 +166,6 @@ invertButtonElement.addEventListener("click",function(){
 
 
 
-
-
 // creo l'elemento div contenitore dei testi nel DOM
 let imageTextElement = document.createElement("div");
 
@@ -190,7 +196,7 @@ imageTextElement.append(imageCaptionElement);
 /* -------------------------------------------------------------------------- */
 
 // ciclo di creazione delle thumbnail 
-for(let i = 0; i < images.length; i++){
+images.forEach(elemento =>{
 
     // creo il nuovo elemento in pagina che corrisponderà alal thumbnail
     let newThumbnail = document.createElement("div");
@@ -202,13 +208,13 @@ for(let i = 0; i < images.length; i++){
     newThumbnail.style.height = "calc(100% /" + images.length + ")";
 
     // imposto il background delle thumbnails
-    newThumbnail.style.backgroundImage ='url("' + images[i].image + '")';
+    newThumbnail.style.backgroundImage ='url("' + elemento.image + '")';
 
     // attribuisco la genitorialità
     thumbnailContainerElement.append(newThumbnail);
 
 
-}
+})
 
 // creo un nodo contenente tutti gli elementi HTML delle thumbnail
 const thumbnails = document.querySelectorAll(".thumbnail");
