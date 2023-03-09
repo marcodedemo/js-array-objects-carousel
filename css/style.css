@@ -30,6 +30,9 @@ h1{
 #imgs-container{
     width: 100%;
     height: 100%;
+
+    position: relative;
+    color: white;
 }
 
 /* images */
@@ -42,26 +45,49 @@ h1{
 }
 
 
+/* -------------------------------------------------------------------------- */
+/*                 stile test per l'esecuzione delle milestone                */
+/* -------------------------------------------------------------------------- */
+#imgs-container .text{
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: end;
+}
+
+#imgs-container .title{
+    font-weight: bold;
+    font-size: 2em;
+}
+
+#imgs-container .caption{
+    
+}
+
 /* arrows */
 #arrow-up{
     position: absolute;
-    top: 10px;
+    top: -40px;
     right: 50%;
 
     font-size: 2em;
-    color: white;
+    color: black;
 
     z-index: 1;
 }
 
 #arrow-down{
     position: absolute;
-    bottom: 10px;
+    bottom: -40px;
     right: 50%;
 
 
     font-size: 2em;
-    color: white;
+    color: black;
 
     z-index: 1;
 

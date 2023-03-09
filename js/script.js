@@ -23,8 +23,20 @@
 // BONUS 3:
 // Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
+// dichiaro le variabili corrispondenti alle frecce
+let arrowUpElement = document.getElementById("arrow-up");
+let arrowDownElement = document.getElementById("arrow-down");
 
+// dichiaro la variabile corrispondente al container dell'immagine, del titolo e della descrizione
+let imageContainerElement = document.getElementById("imgs-container");
 
+// dichiaro la variabile corrispondente all'immagine dello slideshow
+let imageElement = document.getElementById("slideshow-image");
+
+// dichiaro una variabile indice corrispondente all'indice dell'immagine dello slideshow
+let index = 0;
+
+// array di oggetti
 const images = [
     {
         image: 'img/01.webp',
@@ -52,3 +64,153 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+
+
+// creo l'elemento div contenitore dei testi nel DOM
+let imageTextElement = document.createElement("div");
+
+// gli attribuisco una classe di stile
+imageTextElement.classList.add("text");
+
+// attribuisco la genitorialità
+imageContainerElement.append(imageTextElement);
+
+
+/* -------------------------------------------------------------------------- */
+
+// imposto una variabile alla funzione di creazione del titolo
+let imageTitleElement = createImageTitle();
+
+// attribuisco la genitorialità dell'elemento titolo
+imageTextElement.append(imageTitleElement);
+
+
+// imposto una variabile alla funzione di creazione della caption 
+let imageCaptionElement = createImageCaption();
+
+// attribuisco la genitorialità dell'elemento caption
+imageTextElement.append(imageCaptionElement);
+
+
+/* -------------------------------------------------------------------------- */
+
+
+// imposto lo stato iniziale di immagine, titolo e caption
+imageTitleAndCaptionSetToStart(imageElement, imageTitleElement, imageCaptionElement, images);
+
+
+
+
+
+
+// imposto l'evento click della freccia su
+arrowUpElement.addEventListener("click", () =>{
+
+    // se l'indice dello slideshow è minore della lunghezza dell'array -1
+    if(index < images.length - 1){
+
+        // aumento l'indice
+        index++;
+
+        // cambio l'immagine da visualizzare in base all'indice
+        imageElement.src = images[index].image;
+
+        // cambio il titolo da visualizzare in base all'indice
+        imageTitleElement.innerText = images[index].title;
+
+        // cambio la caption da visualizzare in base all'indice
+        imageCaptionElement.innerText = images[index].text;
+
+
+
+    }
+
+})
+
+// imposto l'evento click della freccia giu
+arrowDownElement.addEventListener("click", () =>{
+
+    // se l'indice dello slideshow è minore o uguale alla lunghezza dell'array -1 E l'indice è maggiore uguale a 1 
+    if(index <= images.length - 1  && index >= 1){
+    
+        // diminuisco l'indice
+        index--;
+
+        // cambio l'immagine da visualizzare in base all'indice
+        imageElement.src = images[index].image;
+
+        // cambio il titolo da visualizzare in base all'indice
+        imageTitleElement.innerText = images[index].title;
+
+        // cambio la caption da visualizzare in base all'indice
+        imageCaptionElement.innerText = images[index].text;
+
+    }
+})
+
+
+
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                  functions                                 */
+/* -------------------------------------------------------------------------- */
+
+
+// creo l'elemento titolo 
+function createImageTitle(){
+
+    // creo l'elemento div corrispettivo al titolo nel DOM
+    let imageTitle = document.createElement("div");
+    
+    // gli attribuisco una classe di stile
+    imageTitle.classList.add("title");
+    
+    // scrivo il titolo all'interno
+    imageTitle.innerText = "";
+
+    // return imageTitle
+    return imageTitle;
+    
+}
+
+
+// creo l'elemento caption
+function createImageCaption (){
+
+    // creo l'elemento div corrispettivo alla caption nel DOM
+    let imageCaption = document.createElement("div");
+    
+    // gli attribuisco una classe di stile
+    imageCaption.classList.add("caption");
+    
+    // scrivo la caption all'interno
+    imageCaption.innerText = "";  
+
+    return imageCaption;
+    
+}
+
+
+/**
+ * funzione che inizializza l'immagine il titolo e la caption
+ * @param {HTMLelement} image
+ * @param {HTMLelement} title
+ * @param {HTMLelement} caption
+ * @param {array} array
+ * @returns {any}
+ */
+
+function imageTitleAndCaptionSetToStart (image, title, caption, array){
+
+    // imposto l'immagine di partenza dello slideshow
+    image.src = array[index].image;
+
+    // imposto il titolo dell'immagine di partenza
+    title.innerText = array[index].title;
+
+    // imposto la descrizione dell'immagine di partenza
+    caption.innerText = array[index].text;
+}
