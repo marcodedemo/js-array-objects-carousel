@@ -196,9 +196,9 @@ imageTextElement.append(imageCaptionElement);
 /* -------------------------------------------------------------------------- */
 
 // ciclo di creazione delle thumbnail 
-images.forEach(elemento =>{
+images.forEach( (elemento, actualIndex) =>{
 
-    // creo il nuovo elemento in pagina che corrisponderà alal thumbnail
+    // creo il nuovo elemento in pagina che corrisponderà alla thumbnail
     let newThumbnail = document.createElement("div");
 
     // aggiungo una classe di stile
@@ -210,13 +210,32 @@ images.forEach(elemento =>{
     // imposto il background delle thumbnails
     newThumbnail.style.backgroundImage ='url("' + elemento.image + '")';
 
+
+    // al click della thumbnail
+    newThumbnail.addEventListener("click", () =>{
+
+        // rimuovo la classe active dalla thumbnail precedente
+        thumbnails[index].classList.remove("active");
+
+        // reimposto l'index
+        index = actualIndex;
+
+        // cambio immagine titolo e caption
+        changeImgTitleCaption(imageElement, imageTitleElement, imageCaptionElement, images);
+        
+        // aggiungo la classe active alla thumbnail
+        thumbnails[index].classList.add("active");
+
+
+    });
+
     // attribuisco la genitorialità
     thumbnailContainerElement.append(newThumbnail);
 
 
 })
 
-// creo un nodo contenente tutti gli elementi HTML delle thumbnail
+// creo un array contenente tutti gli elementi HTML delle thumbnail
 const thumbnails = document.querySelectorAll(".thumbnail");
 
 // imposto lo stato iniziale di immagine, titolo e caption
